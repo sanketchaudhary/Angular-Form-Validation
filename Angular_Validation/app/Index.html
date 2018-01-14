@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+    <link href="../Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="../scripts/jquery-1.9.1.min.js"></script>
+    <script src="../scripts/angular.min.js"></script>
+    <script src="../scripts/bootstrap.js"></script>
+    <script src="../scripts/app/app.js"></script>
+    <style>
+        body {
+            padding-top: 30px;
+        }
+    </style>
+</head>
+<body ng-app="validationApp" ng-controller="mainController">
+    <div class="container row">
+        <div class="col-sm-8 col-sm-offset-2">
+            <!-- PAGE HEADER -->
+            <div class="page-header"><h1>AngularJS Form Validation</h1></div>
+
+            <!-- FORM -->
+            <!-- pass in the variable if our form is valid or invalid -->
+            <form name="userForm" ng-submit="submitForm(userForm.$valid)" novalidate>
+
+                <!-- NAME -->
+                <div class="form-group" ng-class="{'has-error': userForm.name.$invalid && !userForm.name.$pristine}">
+                    <label>Name</label>
+                    <input type="text" name="name" class="form-control" ng-model="name" required />
+                    <p ng-show="userForm.name.$invalid && !userForm.name.$pristine" class="help-block">Your Name is required.</p>
+                </div>
+
+                <!-- USERNAME -->
+                <div class="form-group" ng-class="{'has-error': userForm.username.$invalid && !userForm.username.$pristine}">
+                    <label>Username</label>
+                    <input type="text" name="username" class="form-control" ng-model="user.username" ng-minlength="3" ng-maxlength="8" />
+                    <p ng-show="userForm.username.$error.minlength" class="help-block">Username is too short.</p>
+                    <p ng-show="userForm.username.$error.maxlength" class="help-block">Username is too long.</p>
+                </div>
+
+                <!-- EMAIL -->
+                <div class="form-group" ng-class="{'has-error': userForm.email.$invalid && !userForm.email.$pristine}">
+                    <label>Email</label>
+                    <input type="email" name="email" class="form-control" ng-model="email">
+                    <p ng-show="userForm.email.$invalid && !userForm.email.$pristine" class="help-block">Enter a valid Email.</p>
+                </div>
+
+                <!-- SUBMIT BUTTON -->
+                <button type="submit" ng-disabled="userForm.$invalid" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
